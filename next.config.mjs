@@ -6,6 +6,9 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  basePath: '/UniLinker-fy',       
+  assetPrefix: '/UniLinker-fy/',   
+  trailingSlash: true,             
  
 }
 
