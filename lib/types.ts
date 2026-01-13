@@ -18,6 +18,15 @@ export type UserContext = {
 
 export type TopicCategory = "administrative" | "university" | "life" | "mentorship"
 
+export type TopicRelevance = {
+  // If true, only show for non-EU nationals
+  requiresNonEU?: boolean
+  // If true, only show for EU nationals
+  requiresEU?: boolean
+  // Specific nationality codes where this topic is NOT relevant
+  excludeNationalities?: string[]
+}
+
 export type Topic = {
   id: string
   title: string
@@ -26,6 +35,8 @@ export type Topic = {
   icon: string
   requiresVisa?: boolean
   tags?: string[]
+  comingSoon?: boolean
+  relevance?: TopicRelevance
 }
 
 export type Answer = {
@@ -83,4 +94,15 @@ export type Mentor = {
   areas: string[]
   trustScore: number
   responseTime: string
+}
+
+export type RealTimeline = {
+  id: string
+  visaType: string
+  nationality: string
+  submissionDate: string
+  followUps: { date: string; action: string }[]
+  approvalDate: string
+  totalDays: number
+  notes?: string
 }

@@ -1,4 +1,4 @@
-import type { Nationality, Country, Topic, Question, TimelineStep, University, Mentor } from "./types"
+import type { Nationality, Country, Topic, Question, TimelineStep, University, Mentor, RealTimeline } from "./types"
 
 export const nationalities: Nationality[] = [
   { code: "TW", name: "Taiwan", flag: "🇹🇼", isEU: false },
@@ -31,6 +31,7 @@ export const topics: Topic[] = [
     icon: "passport",
     requiresVisa: true,
     tags: ["urgent", "legal"],
+    relevance: { requiresNonEU: true },
   },
   {
     id: "registration",
@@ -39,6 +40,7 @@ export const topics: Topic[] = [
     category: "administrative",
     icon: "building",
     tags: ["required"],
+    comingSoon: true,
   },
   {
     id: "blocked-account",
@@ -48,6 +50,8 @@ export const topics: Topic[] = [
     icon: "bank",
     requiresVisa: true,
     tags: ["financial"],
+    comingSoon: true,
+    relevance: { requiresNonEU: true },
   },
   {
     id: "health-insurance",
@@ -56,6 +60,7 @@ export const topics: Topic[] = [
     category: "administrative",
     icon: "shield",
     tags: ["required"],
+    comingSoon: true,
   },
 
   // University Reality
@@ -92,6 +97,7 @@ export const topics: Topic[] = [
     category: "life",
     icon: "home",
     tags: ["urgent", "essential"],
+    comingSoon: true,
   },
   {
     id: "banking",
@@ -108,6 +114,7 @@ export const topics: Topic[] = [
     category: "life",
     icon: "briefcase",
     tags: ["work"],
+    comingSoon: true,
   },
   {
     id: "internships",
@@ -116,6 +123,7 @@ export const topics: Topic[] = [
     category: "life",
     icon: "building-2",
     tags: ["work", "career"],
+    comingSoon: true,
   },
 
   // Mentorship
@@ -357,5 +365,189 @@ export const mentors: Mentor[] = [
     areas: ["Healthcare", "Banking", "German Language"],
     trustScore: 4.9,
     responseTime: "Within 24 hours",
+  },
+]
+
+export const visaOverview = {
+  summary:
+    "The German student visa (National Visa for Study Purposes) allows non-EU students to study at German universities. Processing typically takes 4-12 weeks depending on your nationality and embassy workload.",
+  requirements: [
+    "Valid passport (at least 6 months beyond intended stay)",
+    "University admission letter (Zulassungsbescheid)",
+    "Proof of financial resources (blocked account with €11,208/year)",
+    "Health insurance coverage for Germany",
+    "Proof of German language proficiency (if required by program)",
+    "Completed visa application form with biometric photo",
+  ],
+  documents: [
+    { name: "Passport", description: "Original + 2 copies of all pages" },
+    { name: "Application form", description: "Completed and signed" },
+    { name: "Biometric photos", description: "2 recent passport photos (35x45mm)" },
+    { name: "Admission letter", description: "Original from German university" },
+    { name: "Blocked account proof", description: "Confirmation letter from bank" },
+    { name: "Health insurance", description: "Coverage confirmation in German" },
+    { name: "Motivation letter", description: "Why you want to study in Germany" },
+    { name: "CV", description: "Tabular format preferred" },
+  ],
+  pitfalls: [
+    "Booking appointments too late (3-4 months wait in peak season)",
+    "Name mismatches across documents",
+    "Insufficient funds in blocked account",
+    "Missing or expired documents on appointment day",
+    "Not bringing original documents (copies not accepted)",
+    "Travel insurance instead of proper health insurance",
+  ],
+}
+
+export const realTimelines: RealTimeline[] = [
+  {
+    id: "rt1",
+    visaType: "National Visa (D)",
+    nationality: "Taiwan",
+    submissionDate: "2025-04-15",
+    followUps: [
+      { date: "2025-05-02", action: "Embassy requested additional financial proof" },
+      { date: "2025-05-10", action: "Submitted updated blocked account statement" },
+    ],
+    approvalDate: "2025-05-28",
+    totalDays: 43,
+    notes: "Applied at German Institute Taipei. Morning appointment recommended.",
+  },
+  {
+    id: "rt2",
+    visaType: "National Visa (D)",
+    nationality: "India",
+    submissionDate: "2025-03-20",
+    followUps: [{ date: "2025-04-05", action: "Received call to verify university admission" }],
+    approvalDate: "2025-05-15",
+    totalDays: 56,
+    notes: "Applied at VFS Global Mumbai. Longer processing due to high volume.",
+  },
+  {
+    id: "rt3",
+    visaType: "National Visa (D)",
+    nationality: "China",
+    submissionDate: "2025-05-01",
+    followUps: [],
+    approvalDate: "2025-06-10",
+    totalDays: 40,
+    notes: "Smooth process at Beijing embassy. All documents accepted first time.",
+  },
+  {
+    id: "rt4",
+    visaType: "National Visa (D)",
+    nationality: "Brazil",
+    submissionDate: "2025-02-10",
+    followUps: [
+      { date: "2025-03-01", action: "Embassy requested motivation letter translation" },
+      { date: "2025-03-08", action: "Provided certified translation" },
+      { date: "2025-03-20", action: "Interview scheduled" },
+    ],
+    approvalDate: "2025-04-05",
+    totalDays: 54,
+    notes: "São Paulo consulate. Interview was brief, mostly about study plans.",
+  },
+  {
+    id: "rt5",
+    visaType: "National Visa (D)",
+    nationality: "South Korea",
+    submissionDate: "2025-06-01",
+    followUps: [],
+    approvalDate: "2025-06-25",
+    totalDays: 24,
+    notes: "Very fast processing at Seoul embassy. Online booking worked well.",
+  },
+  {
+    id: "rt6",
+    visaType: "National Visa (D)",
+    nationality: "Taiwan",
+    submissionDate: "2025-07-10",
+    followUps: [{ date: "2025-07-25", action: "Additional language certificate requested" }],
+    approvalDate: "2025-08-20",
+    totalDays: 41,
+    notes: "Summer is busy season. Book early!",
+  },
+]
+
+export const visaQuestions: Question[] = [
+  {
+    id: "vq1",
+    question: "When should I book my visa appointment for Germany?",
+    answers: [
+      {
+        id: "va1",
+        content:
+          "Book at least 3-4 months before your intended travel date. Embassy appointments fill up quickly, especially during peak season (June-August). I made the mistake of waiting until 2 months before and had to delay my semester start.",
+        author: { nationality: "Taiwan", university: "TU Dresden", visaType: "National Visa (D)", status: "student" },
+        helpfulCount: 47,
+        date: "2025-08-15",
+      },
+      {
+        id: "va2",
+        content:
+          "For the German embassy in Taipei, slots open at midnight on the 1st of each month. Set an alarm and be ready to book immediately. I got my appointment within 5 minutes of slots opening.",
+        author: { nationality: "Taiwan", university: "TUM", visaType: "National Visa (D)", status: "graduate" },
+        helpfulCount: 32,
+        date: "2025-09-02",
+      },
+    ],
+  },
+  {
+    id: "vq2",
+    question: "What documents do I actually need for the blocked account?",
+    answers: [
+      {
+        id: "va3",
+        content:
+          "You need: passport copy, admission letter, proof of address (can be temporary), and around €11,208 for the year. I used Expatrio - the process took about 2 weeks. Make sure your name matches exactly across all documents.",
+        author: { nationality: "India", university: "TU Dresden", visaType: "National Visa (D)", status: "student" },
+        helpfulCount: 58,
+        date: "2025-07-20",
+      },
+      {
+        id: "va4",
+        content:
+          "Fintiba is also a good option. Slightly faster than Expatrio in my experience. The key is starting early - transfer times for international wire can take 3-5 business days, and then account verification takes another week.",
+        author: { nationality: "China", university: "LMU Munich", visaType: "National Visa (D)", status: "student" },
+        helpfulCount: 41,
+        date: "2025-08-01",
+      },
+    ],
+  },
+  {
+    id: "vq3",
+    question: "Can I use travel insurance for the visa appointment?",
+    answers: [
+      {
+        id: "va5",
+        content:
+          "No! This is a common mistake. Travel insurance is NOT accepted. You need proper German health insurance (like TK or AOK) or at minimum a coverage letter from a German-recognized insurer. I almost lost my appointment because of this.",
+        author: { nationality: "Brazil", university: "TU Dresden", visaType: "National Visa (D)", status: "student" },
+        helpfulCount: 89,
+        date: "2025-06-10",
+      },
+    ],
+  },
+  {
+    id: "vq4",
+    question: "How strict are embassies about document translations?",
+    answers: [
+      {
+        id: "va6",
+        content:
+          "Very strict in my experience at the Mumbai VFS. All documents not in German or English need certified translations. I had my degree transcripts translated locally by a certified translator. Cost about ₹2000 per document.",
+        author: { nationality: "India", university: "TUM", visaType: "National Visa (D)", status: "graduate" },
+        helpfulCount: 35,
+        date: "2025-07-05",
+      },
+      {
+        id: "va7",
+        content:
+          "The Taipei office was flexible with English documents. But anything in Chinese needed official translation. I recommend getting everything translated anyway to avoid any issues on the day.",
+        author: { nationality: "Taiwan", university: "TU Dresden", visaType: "National Visa (D)", status: "student" },
+        helpfulCount: 28,
+        date: "2025-08-20",
+      },
+    ],
   },
 ]
